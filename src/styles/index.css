@@ -1,0 +1,419 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  /* Color Palette - Detective Agency Theme */
+  --bg-desk: #090a0d;
+  --bg-main: #0e1117;
+  --bg-surface: #101218;
+  --bg-card: #151822;
+  --bg-card-hover: #1b202d;
+  --bg-card-inner: #0d0f15;
+  --bg-elevated: #1a1e2b;
+  
+  /* Manila & Evidence Parchment */
+  --manila-base: #dfd4c0;
+  --manila-light: #f5efe3;
+  --manila-dark: #2c251c;
+  --manila-border: #b8ab94;
+  --manila-ink: #1a1612;
+  
+  /* Antique Gold & Brass */
+  --gold-primary: #d4af37;
+  --gold-dim: #b8860b;
+  --gold-glow: rgba(212, 175, 55, 0.35);
+  --border-gold: rgba(212, 175, 55, 0.4);
+
+  /* Crime Scene Accents */
+  --yarn-red: #e11d48;
+  --yarn-red-hover: #f43f5e;
+  --yarn-glow: rgba(225, 29, 72, 0.35);
+  --seal-crimson: #991b1b;
+  --seal-gold: #b45309;
+  --tape-amber: #f59e0b;
+  --tape-dark: #78350f;
+  --badge-blue: #0284c7;
+  
+  /* Text */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  /* Forensic Status */
+  --status-cleared: #10b981;
+  --status-suspicious: #f59e0b;
+  --status-prime: #ef4444;
+  
+  /* Borders & Shadows */
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-active: rgba(225, 29, 72, 0.5);
+  --shadow-desk: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  --shadow-manila: 0 15px 35px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 0, 0, 0.2);
+
+  /* Physics Transitions */
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --trans-fast: 180ms var(--ease-spring);
+  --trans-normal: 300ms var(--ease-spring);
+  --trans-slow: 500ms var(--ease-spring);
+
+  /* Typography */
+  --font-arabic: 'Cairo', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-desk);
+  color: var(--text-primary);
+  font-family: var(--font-arabic);
+  direction: rtl;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(10, 12, 16, 0.8);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.5);
+}
+
+/* Typography Utilities */
+.title-gold {
+  color: var(--gold-primary);
+  text-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mb-8 { margin-bottom: 8px; }
+.mb-12 { margin-bottom: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+.p-12 { padding: 12px; }
+.p-16 { padding: 16px; }
+.p-20 { padding: 20px; }
+
+/* Double Bezel Hardware Styling */
+.double-bezel {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  transition: transform var(--trans-fast), box-shadow var(--trans-fast), border-color var(--trans-fast);
+}
+
+.double-bezel:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.double-bezel-inner {
+  background: var(--bg-card-inner);
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* =========================================================================
+   HIGH-END UI CONTROLS: DROPDOWNS, BUTTONS, AND TEXT BOXES
+   ========================================================================= */
+
+/* 1. DROPDOWN LISTS (SELECT) */
+select,
+.retro-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: linear-gradient(135deg, rgba(26, 21, 18, 0.95), rgba(18, 14, 12, 0.98));
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  border-radius: 8px;
+  color: #f8fafc;
+  font-family: var(--font-arabic);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 9px 16px 9px 38px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.08);
+  transition: all var(--trans-fast);
+  outline: none;
+  /* Custom SVG Chevron Arrow on Left for RTL */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 12px center;
+  background-size: 14px;
+}
+
+select:hover,
+.retro-select:hover {
+  border-color: var(--gold-primary);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+  background-color: rgba(32, 26, 22, 0.98);
+}
+
+select:focus,
+.retro-select:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+select option,
+.retro-select option {
+  background-color: #16120f;
+  color: #f8fafc;
+  padding: 10px 14px;
+  font-weight: 600;
+  font-family: var(--font-arabic);
+}
+
+/* 2. TEXT BOXES & TEXTAREAS (INPUTS) */
+input[type="text"],
+input[type="search"],
+textarea,
+.retro-input {
+  background: linear-gradient(180deg, rgba(14, 11, 9, 0.95) 0%, rgba(20, 16, 13, 0.98) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #f8fafc;
+  font-family: var(--font-arabic);
+  font-size: 0.92rem;
+  padding: 10px 14px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.7);
+  transition: all var(--trans-fast);
+  outline: none;
+}
+
+input[type="text"]:hover,
+input[type="search"]:hover,
+textarea:hover,
+.retro-input:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+.retro-input:focus {
+  border-color: var(--gold-primary);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8), 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+input::placeholder,
+textarea::placeholder,
+.retro-input::placeholder {
+  color: rgba(148, 163, 184, 0.6);
+  font-style: italic;
+  font-size: 0.88rem;
+}
+
+textarea.retro-input {
+  line-height: 1.7;
+  resize: vertical;
+}
+
+/* 3. BUTTONS */
+button {
+  font-family: var(--font-arabic);
+}
+
+/* Action Hardware Button */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(32, 26, 22, 0.9) 0%, rgba(18, 14, 12, 0.95) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.86rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  transition: all var(--trans-fast);
+}
+
+.action-btn:hover {
+  border-color: var(--gold-primary);
+  color: var(--gold-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+.action-btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Wax Seal Action Button (Primary Crimson / Police Seal) */
+.wax-seal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #a81c1c 0%, #7f1d1d 50%, #450a0a 100%);
+  border: 1.5px solid rgba(248, 113, 113, 0.6);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(185, 28, 28, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  transition: all var(--trans-fast);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.wax-seal-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 8px 28px rgba(220, 38, 38, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  border-color: #fca5a5;
+}
+
+.wax-seal-btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.wax-seal-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.8);
+}
+
+/* Primary Hero Button */
+.btn-primary {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  padding: 10px 24px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(225, 29, 72, 0.4);
+  transition: transform var(--trans-fast), box-shadow var(--trans-fast);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(225, 29, 72, 0.55);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-icon-wrapper {
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--trans-fast);
+}
+
+.btn-primary:hover .btn-icon-wrapper {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* Tab Filter Buttons */
+.tab-btn {
+  padding: 7px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--trans-fast);
+  color: var(--text-secondary);
+}
+
+.tab-btn:hover {
+  color: var(--gold-primary);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.tab-btn.active {
+  background: var(--gold-primary);
+  color: #0d1117;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.35);
+}
+
+/* Rubber Stamp Effect */
+.manila-stamp,
+.police-stamp {
+  display: inline-block;
+  font-family: var(--font-arabic);
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border: 2.5px solid currentColor;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  transform: rotate(-2deg);
+  opacity: 0.9;
+  user-select: none;
+}
+
+.stamp-classified {
+  color: #ef4444;
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.stamp-confidential {
+  color: #f59e0b;
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.stamp-verified {
+  color: #10b981;
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+}
+
+/* Pulse Glow for Unlocked Elements */
+@keyframes sealPulse {
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.6); }
+  70% { box-shadow: 0 0 0 16px rgba(220, 38, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+.pulse-seal {
+  animation: sealPulse 2s infinite;
+}
